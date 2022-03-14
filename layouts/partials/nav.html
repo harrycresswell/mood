@@ -1,0 +1,10 @@
+<nav class="Nav" aria-label="Main Navigation">
+  <ul class="Nav-list">
+  {{ $currentPage := . }}
+  {{ range .Site.Menus.main }}
+    <li class="Nav-listItem">
+      <a class="Nav-listItemLink{{ if eq $currentPage.RelPermalink .URL }} is-active{{ end }}" href="{{.URL}}">{{ .Name }}</a>
+    </li>
+  {{ end }}
+  </ul>
+</nav>

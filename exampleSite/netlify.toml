@@ -1,0 +1,32 @@
+[context.production.environment]
+  HUGO_VERSION = "0.92.2"
+
+[context.deploy-preview.environment]
+  HUGO_VERSION = "0.92.2"
+
+[build]
+  publish = "public"
+  command = "hugo --gc --minify"
+
+# Cloudinary
+[[redirects]]
+from = "/images/:format/:quality/:width/*"
+to = "https://res.cloudinary.com/harrycresswell/image/upload/:format/:quality/:width/:splat"
+status = 200
+
+[[headers]]
+  for = "/img/*"
+  [headers.values]
+    # Cache for 7 days
+    Cache-Control = "public, s-max-age=604800"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    # Cache forever
+    Cache-Control = "public, max-age=31536000,immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+  Cache-Control = "public, max-age=604800"

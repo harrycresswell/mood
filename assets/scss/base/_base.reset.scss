@@ -1,0 +1,59 @@
+/*------------------------------------*\
+    #BASE: RESET
+\*------------------------------------*/
+
+/**
+ * More sensible default box-sizing:
+ * css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice
+ */
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+html {
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+	-moz-text-size-adjust: none;
+	-webkit-text-size-adjust: none;
+	text-size-adjust: none;
+	text-rendering: optimizeSpeed;
+}
+
+html,
+body {
+	margin: 0;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+	font-size: inherit;
+}
+
+ul,
+ol {
+	margin: 0;
+	padding: 0;
+}
+
+ul[class],
+ol[class] {
+	list-style: none;
+}
+
+img {
+	display: inline-block;
+	border: 0;
+	max-width: 100%;
+	min-width: 100%;
+	height: auto;
+	vertical-align: middle;
+}

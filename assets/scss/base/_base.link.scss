@@ -1,0 +1,30 @@
+/*------------------------------------*\
+    #BASE: LINKS
+\*------------------------------------*/
+
+a {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+a[class] {
+  color: var(--color-dark);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+a:not([class]) {
+  color: var(--color-brand);
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-skip-ink: auto;
+
+  &:hover {
+    background: var(--color-brand);
+    color: var(--color-white);
+    text-decoration: none;
+  }
+}

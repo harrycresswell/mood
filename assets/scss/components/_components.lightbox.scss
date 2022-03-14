@@ -1,0 +1,39 @@
+/*------------------------------------*\
+    #COMPONENTS: LIGHTBOX
+\*------------------------------------*/
+
+.Lightbox-imageContainer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+
+.Lightbox-imageContainerInner {
+	height: 80vh;
+	width: 80vh;
+
+	source,
+	img {
+		position: absolute;
+		inset: 0px;
+		display: block;
+		min-width: 100%;
+		max-width: 100%;
+		min-height: 100%;
+		max-height: 100%;
+		object-fit: contain;
+	}
+}
+
+.Lightbox-navLinks {
+	position: absolute;
+	bottom: 1rem;
+	right: 1rem;
+}
+
+.Lightbox-footer {
+	position: absolute;
+	bottom: 1rem;
+	left: 1rem;
+}

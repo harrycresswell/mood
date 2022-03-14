@@ -1,0 +1,25 @@
+/*------------------------------------*\
+    #COMPONENTS: POSTLIST
+\*------------------------------------*/
+
+.PostList-item {
+ position: relative;
+}
+
+.PostList-itemTitle {
+ margin-top: .5rem;
+}
+
+.PostList-itemLink {
+ display: block;
+
+ // See Heydon’s pseudo-content trick: https://heydon.github.io/inclusive-components-demos/cards-pseudo-content/
+ &::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+ }
+}

@@ -1,0 +1,24 @@
+baseURL = "http://example.org/"
+languageCode = "en-gb"
+title = "Mood"
+disableKinds = ["RSS", "section", "categories", "tags", "taxonomy", "taxonomyTerm"]
+pygmentsCodeFences = false
+pygmentsUseClasses = false
+theme = "mood"
+
+[minify]
+  minifyOutput = true
+
+[permalinks]
+  post = ":slug/"
+
+[params]
+  description = "A moodboard of graphic inspiration."
+  keywords = "Harry Cresswell, mood, moodboard, design inspiration"
+  cloudinary_url = "https://res.cloudinary.com/harrycresswell/image/upload/"
+
+[menu]
+  [[menu.main]]
+    name = "About"
+    url = "/about"
+    weight = 5

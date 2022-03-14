@@ -1,0 +1,64 @@
+{{ define "main" }}
+  <h1 class="visually-hidden">{{ .Title }}</h1>
+  <ul class="PostList grid">
+    {{ $paginator := .Paginate (where .Site.RegularPages "Type" "post") 40 }}
+    {{ range $paginator.Pages }}
+      <li class="PostList-item">
+          {{ $image := .Params.image }}
+          {{ $image_alt := .Params.image_alt }}
+          {{ $image_ratio := .Params.image_ratio }}
+          {{ $cloudinary_url := .Site.Params.cloudinary_url }}
+          {{ $base := "/images/" }}
+          {{ if .Site.IsServer }}
+            {{ $base = $cloudinary_url }}
+          {{ end }}
+          <picture class="{{- with $image_ratio -}}aspect-ratio-{{ . }}{{- end -}}">
+            {{ with $image }}
+              <source 
+                type="image/avif" 
+                srcset="{{ $base }}f_avif/q_60/w_256/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".avif" }} 256w,
+                        {{ $base }}f_avif/q_60/w_512/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".avif" }} 512w,
+                        {{ $base }}f_avif/q_60/w_768/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".avif" }} 768w"
+              />
+              <source 
+                type="image/webp" 
+                srcset="{{ $base }}f_webp/q_60/w_256/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".webp" }} 256w,
+                        {{ $base }}f_webp/q_60/w_512/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".webp" }} 512w,
+                        {{ $base }}f_webp/q_60/w_768/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".webp" }} 768w"
+              />
+              <img
+                srcset="{{ $base }}f_auto/q_60/w_256/{{ . | replaceRE ".jpeg|.JPG|.png|.PNG" ".jpg" }} 256w,
+                        {{ $base }}f_auto/q_60/w_512/{{ . | replaceRE ".jpeg|.JPG|.png|.PNG" ".jpg" }} 512w,
+                        {{ $base }}f_webp/q_60/w_768/{{ . | replaceRE ".jpeg|.JPG|.png|.PNG" ".jpg" }} 768w"
+                src="{{ $base }}f_auto/q_60/w_512/{{ . }}"
+                sizes="(min-width: 768px) 25vw, 100vw"
+                decoding="async"
+                {{ with $image_alt }}
+                  alt="{{ . }}"
+                {{ else }}
+                  alt=""
+                {{ end }} 
+                loading="lazy"
+                style="background-size: cover; background-image: url('{{ $base }}f_auto/q_1/w_5/{{ . }}'); width: 100%;
+                height: 100%;" 
+                {{ if (eq $image_ratio "square") }}
+                  width="1000"
+                  height="1000"
+                {{ else if (eq $image_ratio "landscape") }}
+                  width="100%"
+                  height="853"
+                {{ else if (eq $image_ratio "portrait") }}
+                  width="960"
+                  height="1280"
+                {{ end }}
+              />
+            {{ end }}
+          </picture>
+          <h2 class="PostList-itemTitle">
+            <a class="PostList-itemLink" href="{{ .Permalink }}"> {{ $image_alt }}</a>
+          </h2>
+      </li>
+    {{ end }}
+  </ul>
+  {{ partial "pagination.html" . }}
+{{ end }}

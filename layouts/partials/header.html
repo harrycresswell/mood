@@ -1,0 +1,9 @@
+<header class="flex justify-between items-center" role="banner">
+  {{ if eq .Layout "lightbox" }}
+    <h1>{{ .Title }}</h1>
+    <a href="/" aria-label="Close">Esc</a>
+  {{ else }}
+    <a class="top" href="{{ $.Site.BaseURL }}">{{ .Site.Title }}</a>
+    {{ partial "nav.html" . }}
+  {{ end }}
+</header>

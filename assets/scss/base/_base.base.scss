@@ -1,0 +1,51 @@
+/*------------------------------------*\
+    #BASE: BASE
+\*------------------------------------*/
+
+html {
+	font-feature-settings: "calt", "liga", "hist", "onum", "pnum";
+	font-size: var(--base-font-size);
+	line-height: var(--base-line-height);
+}
+
+body {
+	font-family: var(--font-system-rg);
+	font-weight: var(--font-weight-regular);
+	min-height: 100vh;
+}
+
+main {
+	margin-top: 3rem;
+	margin-bottom: 3rem;
+	min-height: calc(100vh - 180px);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: var(--color-dark);
+	font-weight: var(--font-weight-regular);
+	line-height: 1.2;
+}
+
+p,
+p+p {
+	color: var(--color-dark);
+	margin-top: var(--base-margin);
+	max-width: 56ch;
+}
+
+/* Hide focus styles if they're not needed, for example, 
+when an element receives focus via the mouse. */
+:focus:not(:focus-visible) {
+	outline: 0;
+}
+
+/* Show focus styles on keyboard focus. */
+:focus-visible {
+	outline: dotted 2px var(--color-dark);
+	outline-offset: 3px;
+}
