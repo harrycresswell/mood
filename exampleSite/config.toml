@@ -1,7 +1,7 @@
 baseURL = "http://example.org/"
 languageCode = "en-gb"
 title = "Mood"
-disableKinds = ["section", "categories", "tags", "taxonomy", "taxonomyTerm"]
+disableKinds = ["section"]
 pygmentsCodeFences = false
 pygmentsUseClasses = false
 theme = "mood"
