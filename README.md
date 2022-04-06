@@ -1,6 +1,6 @@
 # Mood
 
-A JavaScript free [Hugo](https://gohugo.io/) theme for moodboarding minimalists.
+A lightweight, JavaScript-free [Hugo](https://gohugo.io/) theme for moodboarding.
 
 ![Mood](preview.png)
 
@@ -21,18 +21,18 @@ A JavaScript free [Hugo](https://gohugo.io/) theme for moodboarding minimalists.
 - Immutable image caching
 - Image proxying with Netlify Redirects
 - 100/100 score on Lighthouse
-- SEO optimized (Twitter cards, Facebook Open Graph, Schema.org)
+- SEO optimized (Twitter cards, Facebook Open Graph)
 - Superlite (Only ~3kb of CSS)
 
 ## Installation
 
-First, [install Hugo](https://gohugo.io/getting-started/installing/), then create a new site.
+[Install Hugo](https://gohugo.io/getting-started/installing/), then create a new site.
 
 ```
 hugo new your-site-name
 ```
 
-To install Mood as your default theme, install this repository in the themes/ directory at the root of your Hugo project:
+Install this repository in the themes/ directory of your Hugo project:
 
 ```
 cd themes/
@@ -70,9 +70,7 @@ Finally, move the _assets_ folder including it’s contents from the _themes/moo
 
 ## Adding content
 
-Replace your content folder with `themes/mood/exampleSite/content` for demo content.
-
-Use hugo command to create new posts.
+Use the `hugo` command to create new posts.
 
 ```
 hugo new post/your-post-title.md
@@ -80,17 +78,20 @@ hugo new post/your-post-title.md
 
 You will find comments in the front matter that explain how to format data correctly.
 
-Add pages as usual.
+Add pages in the same manner.
 
 ```
 hugo new some-page-name.md
 ```
 
+If you want to kick things off with some demo content, then replace your /content folder with `themes/mood/exampleSite/content`.
+
 ## Managing menu items
 
 Configure your menu items in the _config.toml_ file.
 
-```
+```toml
+[menu]
 [[menu.main]]
   name = "About"
   url = "/about"
@@ -107,11 +108,13 @@ Configure your menu items in the _config.toml_ file.
 
 ## Building site
 
+Run `hugo server` to start Hugo’s built-in web server.
+
 ```
 hugo server
 ```
 
-Then head to http://localhost:1313/ in your browser.
+Then head to http://localhost:1313/ to view your site in the browser.
 
 ## Author
 
