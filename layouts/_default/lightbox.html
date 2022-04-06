@@ -63,8 +63,9 @@
         <a href="{{.RelPermalink}}">Next</a>
       {{end}}
     </section>
-    <footer class="Lightbox-footer flex gap20">
+    <footer class="Lightbox-footer flex gap10">
       <time datetime="{{ .Date }}">{{ .Date.Format "2006-01-02" }}</time>
+      <span>–</span>
       <ul class="flex gap10">
         {{ range (.GetTerms "tags") }}
             <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
