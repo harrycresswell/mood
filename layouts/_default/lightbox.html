@@ -67,8 +67,13 @@
       <time datetime="{{ .Date }}">{{ .Date.Format "2006-01-02" }}</time>
       <span>–</span>
       <ul class="flex gap10">
-        {{ range (.GetTerms "tags") }}
-            <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+        {{ $terms := (.GetTerms "tags") }}
+        {{ range $key, $value := $terms }}
+            <li>
+              <a href="{{ .Permalink }}">
+                <span>#</span>{{ .Title }}{{ if ne $key (sub (len $terms) 1) }}, {{ end }}
+              </a>
+            </li>
         {{ end }}
       </ul>
     </footer>
