@@ -1,4 +1,5 @@
 {{ define "main" }}
+  <h1 class="visually-hidden">{{ .Title }}</h1>
   <ul class="PostList grid">
     {{ $paginator := .Paginate (where .Site.RegularPages "Type" "post") 40 }}
     {{ range $paginator.Pages }}
@@ -59,5 +60,5 @@
       </li>
     {{ end }}
   </ul>
-  {{ partial "pagination.html" . }}
+{{ partial "pagination.html" . }}
 {{ end }}
