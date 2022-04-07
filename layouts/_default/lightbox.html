@@ -65,15 +65,15 @@
     </section>
     <footer class="Lightbox-footer flex gap10">
       <time datetime="{{ .Date }}">{{ .Date.Format "2006-01-02" }}</time>
-      <span>–</span>
+      {{ $terms := (.GetTerms "tags") }}
+      {{ with $terms }}<span>–</span>{{ end }}
       <ul class="flex gap10">
-        {{ $terms := (.GetTerms "tags") }}
         {{ range $key, $value := $terms }}
-            <li>
-              <a href="{{ .Permalink }}">
-                <span>#</span>{{ .Title }}{{ if ne $key (sub (len $terms) 1) }}, {{ end }}
-              </a>
-            </li>
+          <li>
+            <a href="{{ .Permalink }}">
+              <span>#</span>{{ .Title }}{{ if ne $key (sub (len $terms) 1) }}, {{ end }}
+            </a>
+          </li>
         {{ end }}
       </ul>
     </footer>
