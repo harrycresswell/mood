@@ -1,5 +1,5 @@
 {{ define "main" }}
-	<h1>{{.Title}}</h1>
+	<h1>{{ .Title | title }}</h1>
 	<ul class="PostList grid">
 		{{ range .Pages }}
 		<li class="PostList-item">

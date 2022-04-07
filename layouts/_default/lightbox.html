@@ -71,7 +71,7 @@
         {{ range $key, $value := $terms }}
           <li>
             <a href="{{ .Permalink }}">
-              <span>#</span>{{ .Title }}{{ if ne $key (sub (len $terms) 1) }}, {{ end }}
+              <span>#</span>{{ .Title | lower }}{{ if ne $key (sub (len $terms) 1) }}, {{ end }}
             </a>
           </li>
         {{ end }}
