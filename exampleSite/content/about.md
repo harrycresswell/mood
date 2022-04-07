@@ -1,4 +1,5 @@
 ---
+title: about
 date: 2019-01-18T14:07:07+01:00
 draft: false
 slug: "about"
