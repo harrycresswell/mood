@@ -3,7 +3,7 @@
 	<ul>
 		{{ range .Pages }}
   <li>
-  	<a href="{{ .Permalink }}">{{ .Title }}</a>
+  	<a href="{{ .Permalink }}"><span aria-hidden="true">#</span>{{ .Title }}</a>
   </li>
   {{ end }}
  </ul>
