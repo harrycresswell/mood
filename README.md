@@ -43,7 +43,7 @@ git clone https://github.com/harrycresswell/mood.git
 
 First, move the `config.toml` and `netlify.toml` files from `themes/mood/exampleSite` to the root of your new project.
 
-Then, at the top of your _config.toml_ file, set `mood` as your default theme:
+Make sure `mood` is set as your default theme at the top of your `config.toml` file:
 
 ```
 theme = "mood"
@@ -84,7 +84,7 @@ Add pages in the same manner.
 hugo new some-page-name.md
 ```
 
-If you want to kick things off with some demo content, then replace your /content folder with `themes/mood/exampleSite/content`.
+If you prefer to start your project with demo content, then replace your /content folder with `themes/mood/exampleSite/content`.
 
 ## Managing menu items
 
