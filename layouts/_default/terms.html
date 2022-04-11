@@ -1,6 +1,6 @@
 {{ define "main" }}
 	<h1>{{ .Title | title }}</h1>
-	<ul>
+	<ul class="TagList">
 		{{ range .Pages }}
   <li>
   	<a href="{{ .Permalink }}"><span aria-hidden="true">#</span>{{ .Title }}</a>
