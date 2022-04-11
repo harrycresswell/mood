@@ -6,5 +6,8 @@ image: "v1590250101/mood/virgil-abloh-personal-design-language.jpg"
 image_alt: "Virgil Abloh’s – Personal Design Language"
 image_ratio: "landscape"
 layout: lightbox
+tags:
+- Virgil Abloh
+- Design
 ---
 

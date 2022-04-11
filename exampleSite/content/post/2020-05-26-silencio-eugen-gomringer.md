@@ -6,4 +6,7 @@ image: "v1590490890/mood/silencio-eugen-gomringer.jpg"
 image_alt: "Silencio Eugen Gomringer"
 image_ratio: portrait
 layout: lightbox
+tags:
+- Typography
+- Texture
 ---

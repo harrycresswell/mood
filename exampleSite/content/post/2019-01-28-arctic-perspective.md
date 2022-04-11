@@ -6,4 +6,8 @@ image: "v1548709692/mood/tumblr_op6e0njYyS1woduf5o1_500.jpg"
 image_alt: "Arctic Perspective"
 image_ratio: "portrait"
 layout: lightbox
+tags:
+- BW
+- Graphic
+- Typography
 ---

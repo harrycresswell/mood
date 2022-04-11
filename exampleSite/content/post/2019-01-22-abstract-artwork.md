@@ -7,4 +7,8 @@ image: "v1548706561/mood/tumblr_pjzjqjMlQP1woduf5o1_1280.jpg"
 image_alt: "Abstract artwork"
 image_ratio: "portrait"
 layout: lightbox
+tags:
+ - Painting
+ - Chrome
+ - BW
 ---

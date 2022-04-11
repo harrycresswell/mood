@@ -7,4 +7,7 @@ image: "v1548709383/mood/tumblr_ob0oqbpqJO1r5nwzoo1_640.jpg"
 image_alt: "Nike go faster"
 image_ratio: "landscape"
 layout: lightbox
+tags:
+ - BW
+ - Logo
 ---
