@@ -13,7 +13,8 @@ A lightweight, JavaScript-free [Hugo](https://gohugo.io/) theme for moodboarding
 - Clean and simple design
 - Page specific meta titles
 - Responsive layout
-- Minimal CSS
+- SCSS support for local development
+- Minimal inlined CSS for production
 - [Cloudinary](https://cloudinary.com/) image hosting
 - Page specific keywords
 - Low quality Image placeholders (LQIP)
