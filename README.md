@@ -107,7 +107,7 @@ Configure your menu items in the _config.toml_ file.
   weight = 10 
 ```
 
-## Building site
+## Run a local development server
 
 Run `hugo server` to start Hugo’s built-in web server.
 
@@ -116,6 +116,19 @@ hugo server
 ```
 
 Then head to http://localhost:1313/ to view your site in the browser.
+
+## Deploying to Netlify
+
+To take advantage of image proxying and image caching make sure you host your site using [Netlify](https://www.netlify.com/).
+
+Steps to reproduce:
+
+1. Follow [Installation](#installation) and [Configuration](#configuration)
+2. Create a new repository on GitHub, GitLab or Bitbucket
+3. Push your site to remote repository
+4. Creat new site with continuous deployment
+
+**Struggling to get set up?** Follow the [Host on Netlify](https://gohugo.io/hosting-and-deployment/hosting-on-netlify/) tutorial in the Hugo Docs.
 
 ## Author
 
