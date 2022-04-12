@@ -33,11 +33,17 @@ A lightweight, JavaScript-free [Hugo](https://gohugo.io/) theme for moodboarding
 hugo new your-site-name
 ```
 
-Install this repository in the themes/ directory of your Hugo project:
+Initialise git in your new site project
+
+```
+git init
+```
+
+With Git initialised, install this repository in the themes/ directory of your Hugo project:
 
 ```
 cd themes/
-git clone https://github.com/harrycresswell/mood.git
+git submodule add https://github.com/harrycresswell/mood.git
 ```
 
 ## Configuration
@@ -117,7 +123,7 @@ hugo server
 
 Then head to http://localhost:1313/ to view your site in the browser.
 
-## Deploying to Netlify
+## Deploying with Netlify
 
 To take advantage of image proxying and image caching make sure you host your site using [Netlify](https://www.netlify.com/).
 
@@ -130,6 +136,26 @@ Steps to reproduce:
 
 **Struggling to get set up?** Follow the [Host on Netlify](https://gohugo.io/hosting-and-deployment/hosting-on-netlify/) tutorial in the Hugo Docs.
 
+## Updating your theme to the latest version
+
+Switch to the theme’s directory and list all available versions:
+
+```
+cd themes/mood
+git tag
+```
+
+Checkout a specific version:
+
+```
+git checkout tags/<version-name>
+```
+
+Update to the latest version by running the following command in the root directory of your project:
+
+```
+git submodule update --rebase --remote
+```
 ## Author
 
 Harry Cresswell
