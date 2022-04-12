@@ -1,11 +1,8 @@
 /*------------------------------------*\
-    #UTILITIES: RATIO
+    #COMPONENTS: NAV
 \*------------------------------------*/
 
-.gap10 {
- gap: .5rem;
-}
 
-.gap20 {
-	gap: 1rem;
+.NavList-itemLink.is-active {
+ text-decoration: underline;
 }
