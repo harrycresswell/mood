@@ -22,3 +22,7 @@ theme = "mood"
     name = "About"
     url = "/about"
     weight = 5
+  [[menu.main]]
+    name = "Tags"
+    url = "/tags"
+    weight = 10
