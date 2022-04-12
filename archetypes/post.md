@@ -10,6 +10,11 @@ image: ""
 image_alt: ""
 # Accepted values: portrait, landscape, wide, square
 image_ratio: ""
+# Replace example tags below with your own or remove if not required
+tags:
+- Abstract
+- Illustration
+- BW
 # Must not change
 layout: lightbox
 ---
