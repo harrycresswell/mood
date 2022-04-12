@@ -93,6 +93,10 @@ hugo new some-page-name.md
 
 If you prefer to start your project with demo content, then replace your /content folder with `themes/mood/exampleSite/content`.
 
+## Tagging content
+
+When using the `hugo` command to create new post, the post archetype will populate the front matter of your new post with tag examples. Simply replace these tags with your own.
+
 ## Managing menu items
 
 Configure your menu items in the _config.toml_ file.
