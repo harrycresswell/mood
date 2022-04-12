@@ -15,12 +15,6 @@ to = "https://res.cloudinary.com/harrycresswell/image/upload/:format/:quality/:w
 status = 200
 
 [[headers]]
-  for = "/img/*"
-  [headers.values]
-    # Cache for 7 days
-    Cache-Control = "public, s-max-age=604800"
-
-[[headers]]
   for = "/images/*"
   [headers.values]
     # Cache forever
