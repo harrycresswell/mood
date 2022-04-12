@@ -14,8 +14,9 @@ from = "/images/:format/:quality/:width/*"
 to = "https://res.cloudinary.com/harrycresswell/image/upload/:format/:quality/:width/:splat"
 status = 200
 
+# Netlify Headers
 [[headers]]
   for = "/images/*"
   [headers.values]
-    # Cache forever
-    Cache-Control = "public, max-age=31536000,immutable"
+    # Cache for one year
+    Cache-Control = "public, max-age=31536000, immutable"

@@ -50,7 +50,9 @@
   <meta property="twitter:image" content="/images/{{ .Params.image }}">
   <!-- else if no image in frontmatter, and sections are not equal to articles or notes, then display image --> 
   {{ else }}
-  <meta property="twitter:image" content="{{ .Site.BaseURL }}img/card.png">
+    {{ with resources.Get "images/card.png" }}
+      <meta property="twitter:image" content="{{ (. | fingerprint).RelPermalink }}">
+    {{ end }}
   {{ end }}
   {{ end }}
   <!-- Styles -->
