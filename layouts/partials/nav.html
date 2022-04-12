@@ -1,9 +1,9 @@
-<nav class="Nav" aria-label="Main Navigation">
-  <ul class="Nav-list flex gap20">
+<nav aria-label="Main Navigation">
+  <ul class="NavList flex gap20">
   {{ $currentPage := . }}
   {{ range .Site.Menus.main }}
-    <li class="Nav-listItem">
-      <a class="Nav-listItemLink{{ if $currentPage.IsMenuCurrent "main" . }} is-active{{ end }}" href="{{.URL}}">{{ .Name }}</a>
+    <li class="NavList-item">
+      <a class="NavList-itemLink{{ if $currentPage.IsMenuCurrent "main" . }} is-active{{ end }}" href="{{.URL}}">{{ .Name }}</a>
     </li>
   {{ end }}
   </ul>
