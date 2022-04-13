@@ -3,7 +3,7 @@
   {{- partial "head.html" . -}}
   <body id="top"class="wrapper">
       {{ partial "header.html" . }}
-    <main id="main-content">
+    <main id="main-content" {{ if ne .Layout "lightbox" }}class="flex-grow-1"{{ end }}>
       {{- block "main" . }}{{- end }}
     </main>
     {{- block "footer" . }}{{- end }}
