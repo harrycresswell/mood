@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en{{ end }}">
   {{- partial "head.html" . -}}
-  <body id="top" class="wrapper">
-    {{ partial "header.html" . }}
+  <body id="top"class="wrapper">
+      {{ partial "header.html" . }}
     <main id="main-content">
       {{- block "main" . }}{{- end }}
     </main>
-    {{ if ne .Layout "lightbox" }}
-      {{- partialCached "footer.html" . -}}
-    {{ end }}
+    {{- block "footer" . }}{{- end }}
   </body>
 </html>

@@ -7,77 +7,77 @@
   {{ if .Site.IsServer }}
     {{ $base = $cloudinary_url }}
   {{ end }}
-  <article class="Lightbox">
-    <div class="Lightbox-imageContainer">
-      <div class="Lightbox-imageContainerInner">
-        <picture class="Lightbox-image">
-          {{ with $image }}
-            <source 
-              type="image/avif" 
-              srcset="{{ $base }}f_avif/q_60/w_256/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".avif"  }} 256w,
-                      {{ $base }}f_avif/q_60/w_512/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".avif" }} 512w,
-                      {{ $base }}f_avif/q_60/w_768/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".avif" }} 768w,
-                      {{ $base }}f_avif/q_60/w_960/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".avif" }} 960w"
-            />
-            <source 
-              type="image/webp" 
-              srcset="{{ $base }}f_webp/q_60/w_256/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".webp" }} 256w,
-                      {{ $base }}f_webp/q_60/w_512/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".webp" }} 512w,
-                      {{ $base }}f_webp/q_60/w_768/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".webp" }} 768w,
-                      {{ $base }}f_webp/q_60/w_960/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".webp" }} 960w"
-            />
-            <img
-              srcset="{{ $base }}f_auto/q_60/w_256/{{ . | replaceRE ".jpeg|.JPG|.png|.PNG" ".jpg" }} 256w,
-                      {{ $base }}f_auto/q_60/w_512/{{ . | replaceRE ".jpeg|.JPG|.png|.PNG" ".jpg" }} 512w,
-                      {{ $base }}f_auto/q_60/w_768/{{ . | replaceRE ".jpeg|.JPG|.png|.PNG" ".jpg" }} 768w,
-                      {{ $base }}f_auto/q_60/w_960/{{ . | replaceRE ".jpeg|.JPG|.png|.PNG" ".jpg" }} 960w"
-              src="{{ $base }}f_auto/q_60/w_512/{{ . }}"
-              sizes="(min-width: 768px) 25vw, 100vw"
-              {{ with $image_alt }}
-                alt="{{ . }}"
-              {{ else }}
-                alt=""
-              {{ end }} 
-              {{ if (eq $image_ratio "square") }}
-                width="1000"
-                height="1000"
-              {{ else if (eq $image_ratio "landscape") }}
-                width="100%"
-                height="853"
-              {{ else if (eq $image_ratio "portrait") }}
-                width="960"
-                height="1280"
-              {{ end }}
-            />
-          {{ end }}
-        </picture>
-      </div>
-    </div>
-    {{ $pages := where .Site.RegularPages "Type" "post" }}
-    <section class="Lightbox-navLinks">
-      {{with $pages.Prev . }}
-        <a href="{{.RelPermalink}}">Prev</a>
-      {{end}}
-      &middot;
-      {{ with $pages.Next . }}
-        <a href="{{.RelPermalink}}">Next</a>
-      {{end}}
-    </section>
-    <footer class="Lightbox-footer flex gap10">
-      <time datetime="{{ .Date }}">{{ .Date.Format "2006-01-02" }}</time>
-      {{ $terms := (.GetTerms "tags") }}
-      {{ with $terms }}<span>–</span>{{ end }}
-      <ul class="flex gap10">
-        {{ range $key, $value := $terms }}
-          <li>
-            <a href="{{ .Permalink }}">
-              <span>#</span>{{ .Title | lower }}{{ if ne $key (sub (len $terms) 1) }}, {{ end }}
-            </a>
-          </li>
+  <div class="Lightbox-imageContainer">
+    <div class="Lightbox-imageContainerInner">
+      <picture class="Lightbox-image">
+        {{ with $image }}
+          <source 
+            type="image/avif" 
+            srcset="{{ $base }}f_avif/q_60/w_256/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".avif"  }} 256w,
+                    {{ $base }}f_avif/q_60/w_512/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".avif" }} 512w,
+                    {{ $base }}f_avif/q_60/w_768/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".avif" }} 768w,
+                    {{ $base }}f_avif/q_60/w_960/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".avif" }} 960w"
+          />
+          <source 
+            type="image/webp" 
+            srcset="{{ $base }}f_webp/q_60/w_256/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".webp" }} 256w,
+                    {{ $base }}f_webp/q_60/w_512/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".webp" }} 512w,
+                    {{ $base }}f_webp/q_60/w_768/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".webp" }} 768w,
+                    {{ $base }}f_webp/q_60/w_960/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".webp" }} 960w"
+          />
+          <img
+            srcset="{{ $base }}f_auto/q_60/w_256/{{ . | replaceRE ".jpeg|.JPG|.png|.PNG" ".jpg" }} 256w,
+                    {{ $base }}f_auto/q_60/w_512/{{ . | replaceRE ".jpeg|.JPG|.png|.PNG" ".jpg" }} 512w,
+                    {{ $base }}f_auto/q_60/w_768/{{ . | replaceRE ".jpeg|.JPG|.png|.PNG" ".jpg" }} 768w,
+                    {{ $base }}f_auto/q_60/w_960/{{ . | replaceRE ".jpeg|.JPG|.png|.PNG" ".jpg" }} 960w"
+            src="{{ $base }}f_auto/q_60/w_512/{{ . }}"
+            sizes="(min-width: 768px) 25vw, 100vw"
+            {{ with $image_alt }}
+              alt="{{ . }}"
+            {{ else }}
+              alt=""
+            {{ end }} 
+            {{ if (eq $image_ratio "square") }}
+              width="1000"
+              height="1000"
+            {{ else if (eq $image_ratio "landscape") }}
+              width="100%"
+              height="853"
+            {{ else if (eq $image_ratio "portrait") }}
+              width="960"
+              height="1280"
+            {{ end }}
+          />
         {{ end }}
-      </ul>
-    </footer>
-  </article>
-  
- 
+      </picture>
+    </div>
+  </div>
+{{ end }}
+{{ define "footer" }}
+{{ $pages := where .Site.RegularPages "Type" "post" }}
+<footer class="flex justify-between gap10">
+  <div class="flex flex-wrap">
+    <time datetime="{{ .Date }}">{{ .Date.Format "2006-01-02" }}</time>
+    {{ $terms := (.GetTerms "tags") }}
+    {{ with $terms }}<span>–</span>{{ end }}
+    <ul class="flex gap10">
+      {{ range $key, $value := $terms }}
+        <li>
+          <a href="{{ .Permalink }}">
+            <span>#</span>{{ .Title | lower }}{{ if ne $key (sub (len $terms) 1) }}, {{ end }}
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+  </div>
+  <div class="flex gap10 items-end">
+    {{with $pages.Prev . }}
+      <a href="{{.RelPermalink}}">Prev</a>
+    {{end}}
+    &middot;
+    {{ with $pages.Next . }}
+      <a href="{{.RelPermalink}}">Next</a>
+    {{end}}
+  </div>
+</footer>
 {{ end }}

@@ -62,3 +62,8 @@
   </ul>
 {{ partial "pagination.html" . }}
 {{ end }}
+{{ define "footer" }}
+  {{ if ne .Layout "lightbox" }}
+      {{- partialCached "footer.html" . -}}
+  {{ end }}
+{{ end }}
