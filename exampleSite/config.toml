@@ -19,10 +19,12 @@ theme = "mood"
 
 [menu]
   [[menu.main]]
+    pageRef = "about"
     name = "About"
     url = "/about"
     weight = 5
   [[menu.main]]
+    pageRef = "tags"
     name = "Tags"
     url = "/tags"
     weight = 10
