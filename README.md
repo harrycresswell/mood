@@ -46,8 +46,7 @@ git submodule add https://github.com/harrycresswell/mood.git themes/mood
 git submodule update --init --recursive
 ```
 
-You should now be able to navigate to themes/mood and see all of the theme files.
-
+You should now be able to navigate to `themes/mood` and see all of the theme files.
 
 ## Updating your site to the latest version of the theme
 
