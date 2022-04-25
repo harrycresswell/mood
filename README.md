@@ -49,7 +49,28 @@ git submodule update --init --recursive
 You should now be able to navigate to themes/mood and see all of the theme files.
 
 
+## Updating your site to the latest version of the theme
 
+To update your site to the current version of the theme, navigate to the root directory of your project and run the following:
+
+```
+git submodule update --remote --remote
+```
+
+## Choose a specific theme verison
+
+Move to the theme directory and list all available versions:
+
+```
+cd themes/mood
+git tag
+```
+
+Checkout a specific version:
+
+```
+git checkout tags/<version-name>
+```
 
 ## Configuration
 
@@ -145,26 +166,6 @@ Steps to reproduce:
 
 **Struggling to get set up?** Follow the [Host on Netlify](https://gohugo.io/hosting-and-deployment/hosting-on-netlify/) tutorial in the Hugo Docs.
 
-## Updating your theme to the latest version
-
-Switch to the theme’s directory and list all available versions:
-
-```
-cd themes/mood
-git tag
-```
-
-Checkout a specific version:
-
-```
-git checkout tags/<version-name>
-```
-
-Update to the latest version by running the following command in the root directory of your project:
-
-```
-git submodule update --rebase --remote
-```
 ## Author
 
 Harry Cresswell
