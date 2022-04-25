@@ -33,18 +33,23 @@ A lightweight, JavaScript-free [Hugo](https://gohugo.io/) theme for moodboarding
 hugo new your-site-name
 ```
 
-Initialise git in your new site project
+Navigate to the root directory of your project and initialise Git:
 
 ```
 git init
 ```
 
-With Git initialised, install this repository in the themes/ directory of your Hugo project:
+With Git initialised, install this repository in the themes/ directory:
 
 ```
-cd themes/
-git submodule add https://github.com/harrycresswell/mood.git
+git submodule add https://github.com/harrycresswell/mood.git themes/mood
+git submodule update --init --recursive
 ```
+
+You should now be able to navigate to themes/mood and see all of the theme files.
+
+
+
 
 ## Configuration
 
