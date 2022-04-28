@@ -12,12 +12,10 @@ body {
 	font-family: var(--font-system-rg);
 	font-weight: var(--font-weight-regular);
 	min-height: 100vh;
-}
-
-main {
-	margin-top: 3rem;
-	margin-bottom: 3rem;
-	min-height: calc(100vh - 180px);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 1rem;
 }
 
 h1,

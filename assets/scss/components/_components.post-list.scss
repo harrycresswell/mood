@@ -17,7 +17,7 @@
 .PostList-itemLink {
  display: block;
 
- // See Heydon’s pseudo-content trick: // See Heydon’s pseudo-content trick: https://inclusive-components.design/cards/#thepseudocontenttrick and https://heydon.github.io/inclusive-components-demos/cards-pseudo-content/
+ // See Heydon’s pseudo-content trick: https://inclusive-components.design/cards/#thepseudocontenttrick and https://heydon.github.io/inclusive-components-demos/cards-pseudo-content/
  &::after {
   content: '';
   position: absolute;
