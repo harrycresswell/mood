@@ -39,7 +39,7 @@ Navigate to the root directory of your project and initialise Git:
 git init
 ```
 
-With Git initialised, install this repository in the themes/ directory:
+With Git initialised, install this repository in the `themes/` directory:
 
 ```
 git submodule add https://github.com/harrycresswell/mood.git themes/mood

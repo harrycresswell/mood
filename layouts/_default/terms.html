@@ -1,7 +1,7 @@
 {{ define "main" }}
 	<h1 class="mt20">{{ .Title | title }}</h1>
 	<ul class="TagList">
-		{{ range .Pages }}
+	{{ range .Pages }}
   <li>
   	<a href="{{ .Permalink }}"><span aria-hidden="true">#</span>{{ .Title }}</a>
   </li>
