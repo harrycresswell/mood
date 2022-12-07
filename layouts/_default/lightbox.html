@@ -7,9 +7,9 @@
   {{ if .Site.IsServer }}
     {{ $base = $cloudinary_url }}
   {{ end }}
-  <div class="Lightbox-imageContainer">
-    <div class="Lightbox-imageContainerInner">
-      <picture class="Lightbox-image">
+  <div class="Lightbox">
+    <div class="Lightbox-inner">
+      <picture>
         {{ with $image }}
           <source 
             type="image/avif" 
