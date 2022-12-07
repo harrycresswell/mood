@@ -56,6 +56,11 @@ To update your site to the current version of the theme, navigate to the root di
 git submodule update --remote --merge
 ```
 
+Ensure you replace your existing `assets` folder with the one found in `exampleSite/assets`.
+
+Now commit and push your changes, as normal.
+
+
 ## Choose a specific theme verison
 
 Move to the theme directory and list all available versions:
