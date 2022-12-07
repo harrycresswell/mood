@@ -2,14 +2,14 @@
     #COMPONENTS: LIGHTBOX
 \*------------------------------------*/
 
-.Lightbox-imageContainer {
+.Lightbox {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	position: relative;
 }
 
-.Lightbox-imageContainerInner {
+.Lightbox-inner {
 	height: 80vh;
 	width: 80vh;
 	padding: .5rem;
