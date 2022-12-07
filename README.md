@@ -53,7 +53,7 @@ You should now be able to navigate to `themes/mood` and see all of the theme fil
 To update your site to the current version of the theme, navigate to the root directory of your project and run the following:
 
 ```
-git submodule update --remote --remote
+git submodule update --remote --merge
 ```
 
 ## Choose a specific theme verison
