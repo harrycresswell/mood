@@ -1,18 +1,22 @@
 {{ define "main" }}
-  {{ $image := .Params.image }}
   {{ $image_alt := .Params.image_alt }}
-  {{ $image_ratio := .Params.image_ratio }}
-  {{ $cloudinary_url := .Site.Params.cloudinary_url }}
-  {{ $base := "/images/" }}
-  {{ if .Site.IsServer }}
-    {{ $base = $cloudinary_url }}
-  {{ end }}
   <div class="Lightbox">
     <div class="Lightbox-inner">
+    {{ if isset .Params "image" }}
+      
+      {{ $image := .Params.image }}
+      {{ $image_ratio := .Params.image_ratio }}
+      {{ $cloudinary_url := .Site.Params.cloudinary_url }}
+      {{ $base := "/images/" }}
+      {{ if .Site.IsServer }}
+        {{ $base = $cloudinary_url }}
+      {{ end }}
+
       <picture>
         {{ with $image }}
           <source 
             type="image/avif" 
+            sizes="(min-width: 768px) 25vw, 100vw"
             srcset="{{ $base }}f_avif/q_60/w_256/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".avif"  }} 256w,
                     {{ $base }}f_avif/q_60/w_512/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".avif" }} 512w,
                     {{ $base }}f_avif/q_60/w_768/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".avif" }} 768w,
@@ -20,18 +24,22 @@
           />
           <source 
             type="image/webp" 
+            sizes="(min-width: 768px) 25vw, 100vw"
             srcset="{{ $base }}f_webp/q_60/w_256/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".webp" }} 256w,
                     {{ $base }}f_webp/q_60/w_512/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".webp" }} 512w,
                     {{ $base }}f_webp/q_60/w_768/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".webp" }} 768w,
                     {{ $base }}f_webp/q_60/w_960/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".webp" }} 960w"
           />
-          <img
+          <source 
+            type="image/jpeg" 
+            sizes="(min-width: 768px) 25vw, 100vw"
             srcset="{{ $base }}f_auto/q_60/w_256/{{ . | replaceRE ".jpeg|.JPG|.png|.PNG" ".jpg" }} 256w,
                     {{ $base }}f_auto/q_60/w_512/{{ . | replaceRE ".jpeg|.JPG|.png|.PNG" ".jpg" }} 512w,
                     {{ $base }}f_auto/q_60/w_768/{{ . | replaceRE ".jpeg|.JPG|.png|.PNG" ".jpg" }} 768w,
-                    {{ $base }}f_auto/q_60/w_960/{{ . | replaceRE ".jpeg|.JPG|.png|.PNG" ".jpg" }} 960w"
+                    {{ $base }}f_auto/q_60/w_960/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".jpg" }} 960w"
+          />
+          <img
             src="{{ $base }}f_auto/q_60/w_512/{{ . }}"
-            sizes="(min-width: 768px) 25vw, 100vw"
             {{ with $image_alt }}
               alt="{{ . }}"
             {{ else }}
@@ -50,6 +58,55 @@
           />
         {{ end }}
       </picture>
+    {{ else }}
+
+      {{/* If page resources exist with any of the specified formats and any file name. See https://gohugo.io/content-management/page-resources/ */}}
+      {{ with .Resources.GetMatch "{*.*,*.jpg,*.png,*.jpeg}" }}
+      {{/* Store the resource in a variable */}}
+      {{- $src := . -}}
+      {{/* Add default value for sizes property */}}
+      {{- $sizes := "(min-width: 768px) 25vw, 100vw" -}}
+      {{/* Create a 20-pixel-wide Low Quality Image Placeholder (LQIP), then base64-encode the data for improved cacheing and performance */}}
+      {{- $LQIP_img := $src.Resize "20x jpg" -}}
+      {{- $LQIP_b64 := $LQIP_img.Content | base64Encode -}}
+      {{/* Add base64-encoded data as a background image to use for the DIV which wraps the `<picture>` element */}}
+      {{- $CFPstyle := printf "%s%s%s" "background: url(data:image/jpeg;base64," $LQIP_b64 "); background-size: cover; background-repeat: no-repeat;" -}}
+      {{/* Create a JPG of the image to serve as a “fallback” for browsers that don’t understand the `<picture>` element */}}
+      {{- $actualImg := $src.Resize "640x jpg" -}}
+
+      <div style="{{ $CFPstyle | safeCSS }}">
+        <picture>
+          <source 
+          type="image/webp" 
+          srcset="
+            {{ ($src.Resize "500x webp" ).RelPermalink }} 500w,
+            {{ ($src.Resize "800x webp" ).RelPermalink }} 800w,
+            {{ ($src.Resize "1000x webp" ).RelPermalink }} 1000w,
+            {{ ($src.Resize "1400x webp" ).RelPermalink }} 1400w,"
+          sizes="{{ $sizes }}"
+          />
+          <source 
+          type="image/jpeg" 
+          srcset="
+            {{ ($src.Resize "500x jpg" ).RelPermalink }} 500w,
+            {{ ($src.Resize "800x jpg" ).RelPermalink }} 800w,
+            {{ ($src.Resize "1000x jpg" ).RelPermalink }} 1000w,
+            {{ ($src.Resize "1400x jpg" ).RelPermalink }} 1400w,"
+          sizes="{{ $sizes }}"
+          />
+          <img 
+            src="{{ $actualImg.RelPermalink }}" 
+            alt="{{ $image_alt }}"
+            width="{{ $src.Width }}"
+            height="{{ $src.Height }}"
+            loading="lazy"
+            decoding="async"
+            />
+        </picture>
+      </div>
+    {{ end }}
+
+    {{ end }}
     </div>
   </div>
 {{ end }}
