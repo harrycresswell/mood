@@ -26,34 +26,44 @@
   <meta property="og:description" name="description" content="{{ $isHomePage := eq .Title .Site.Title }}{{ .Site.Params.description }}{{ if eq $isHomePage false }} - {{ .Description }}{{ end }}">
   <meta property="og:url" content="{{ .Permalink }}">
   <meta property="og:type" content="website" />
-  <!-- if featured image exists in file frontmatter, use for open graph data -->
+  <!-- Use Cloudinary featured image if it exists in file frontmatter -->
   {{ if isset .Params "image" }}
-  <meta property="og:image" content="{{$.Site.Params.cloudinary_url }}{{ .Params.image }}">
-  <!-- else if no image in frontmatter, and sections are not equal to articles or notes, then display image --> 
+    <meta property="og:image" content="/images/{{ .Params.image }}">
   {{ else }}
-    {{ with resources.Get "images/card.png" }}
+    <!-- If Page Resources exist, use those instead --> 
+    {{ with .Resources.GetMatch "{*.*,*.jpg,*.png,*.jpeg}" }}
       <meta property="og:image" content="{{ (. | fingerprint).RelPermalink }}">
+    {{ else }}
+      <!-- If neither featured image or Page Resources exist, use Card image from Global Resources (assets/images) -->
+      {{ with resources.Get "images/card.png" }}
+        <meta property="og:image" content="{{ (. | fingerprint).RelPermalink }}">
+      {{ end }}
     {{ end }}
   {{ end }}
   <!-- Twitter -->
   {{ if not .Site.Params.Twitter.hide }}
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="{{ .Permalink }}">
-  <meta property="twitter:title" content="{{ if .IsHome -}}{{ .Site.Title }} &middot; {{ $.Site.Params.strapline }}{{- else -}}{{ .Title }} &middot; {{ .Site.Title }} {{- end }}">
-  <meta property="twitter:description" content="{{ with .Params.Description }}{{ . }}{{ else }}{{ $.Site.Params.Description }}{{ end }}">
-  {{ with .Site.Params.twitter.handle }}
-  <meta property="twitter:site" content="{{ . }}">
-  <meta property="twitter:creator" content="{{ . }}">
-  {{ end }}
-  <!-- if featured image exists in file frontmatter, use for open graph data -->
-  {{ if isset .Params "image" }}
-  <meta property="twitter:image" content="/images/{{ .Params.image }}">
-  <!-- else if no image in frontmatter, and sections are not equal to articles or notes, then display image --> 
-  {{ else }}
-    {{ with resources.Get "images/card.png" }}
-      <meta property="twitter:image" content="{{ (. | fingerprint).RelPermalink }}">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ .Permalink }}">
+    <meta property="twitter:title" content="{{ if .IsHome -}}{{ .Site.Title }} &middot; {{ $.Site.Params.strapline }}{{- else -}}{{ .Title }} &middot; {{ .Site.Title }} {{- end }}">
+    <meta property="twitter:description" content="{{ with .Params.Description }}{{ . }}{{ else }}{{ $.Site.Params.Description }}{{ end }}">
+    {{ with .Site.Params.twitter.handle }}
+      <meta property="twitter:site" content="{{ . }}">
+      <meta property="twitter:creator" content="{{ . }}">
     {{ end }}
-  {{ end }}
+    <!-- Use Cloudinary featured image if it exists in file frontmatter -->
+    {{ if isset .Params "image" }}
+     <meta property="twitter:image" content="/images/{{ .Params.image }}">
+    {{ else }}
+      <!-- If Page Resources exist, use those instead --> 
+      {{ with .Resources.GetMatch "{*.*,*.jpg,*.png,*.jpeg}" }}
+        <meta property="twitter:image" content="{{ (. | fingerprint).RelPermalink }}">
+      {{ else }}
+        <!-- If neither featured image or Page Resources exist, use Card image from Global Resources (assets/images) -->
+        {{ with resources.Get "images/card.png" }}
+          <meta property="twitter:image" content="{{ (. | fingerprint).RelPermalink }}">
+        {{ end }}
+      {{ end }}
+    {{ end }}
   {{ end }}
   <!-- Styles -->
   {{ if .Site.IsServer }}
