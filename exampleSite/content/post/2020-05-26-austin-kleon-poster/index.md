@@ -1,4 +1,5 @@
 {
+"image_alt": "Austin Kleon Poster",
 "image_ratio": "square",
 "layout":"lightbox",
 "title":"Austin Kleon Poster",
