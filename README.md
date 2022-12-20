@@ -92,7 +92,7 @@ Finally, move the _assets_ folder including it’s contents from the _themes/moo
 
 If you would like to use Cloudinary to host image content, head to [Cloudinary.com](https://cloudinary.com/) and set up a free account.
 
-When you have a Cloudinary account set up, open `netlify.toml` and update the `to` value under redirects to your Cloudinary Cloud Name. 
+Now you have a Cloudinary account set up, open `netlify.toml` at the root of your project and located the `to` value, found under redirects. Replace `harrycresswell` found in the URL with your own Cloudinary Cloud Name. 
 
 ```
 [[redirects]]
@@ -102,7 +102,7 @@ to = "https://res.cloudinary.com/your-cloud-name/image/upload/:format/:quality/:
 status = 200
 ```
 
-You can find your Cloud Name on your Cloudinary dashboard.
+You will find your Cloud Name in your Cloudinary dashboard.
 
 Inside `config.toml`, under the `[params]` section update `cloudinary_url` to include your Cloud Name.
 
