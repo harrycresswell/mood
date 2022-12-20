@@ -79,15 +79,20 @@ git checkout tags/<version-name>
 
 First, move the `config.toml` and `netlify.toml` files from `themes/mood/exampleSite` to the root of your new project.
 
-Make sure `mood` is set as your default theme at the top of your `config.toml` file:
+Now, make sure `mood` is set as your default theme at the top of your `config.toml` file:
 
 ```
 theme = "mood"
 ```
 
-Next, head to [Cloudinary.com](https://cloudinary.com/) and set up a free account.
+Finally, move the _assets_ folder including it’s contents from the _themes/mood_ folder to the root of your project.
 
-When you have a Cloudinary account set up, open `netlify.toml` and update the `to` value under redirects to your Cloudinary cloud name. 
+
+### Hosting images with Cloudinary
+
+If you would like to use Cloudinary to host image content, head to [Cloudinary.com](https://cloudinary.com/) and set up a free account.
+
+When you have a Cloudinary account set up, open `netlify.toml` and update the `to` value under redirects to your Cloudinary Cloud Name. 
 
 ```
 [[redirects]]
@@ -97,11 +102,27 @@ to = "https://res.cloudinary.com/your-cloud-name/image/upload/:format/:quality/:
 status = 200
 ```
 
-You can find your cloud name on your Cloudinary dashboard.
+You can find your Cloud Name on your Cloudinary dashboard.
 
-Inside `config.toml`, under the `[params]` section update `cloudinary_url` to include your cloud name.
+Inside `config.toml`, under the `[params]` section update `cloudinary_url` to include your Cloud Name.
 
-Finally, move the _assets_ folder including it’s contents from the _themes/mood_ folder to the root of your project.
+Now your site is configured to use Cloudinary.
+
+### Self-host image content
+
+To self-host image content, make sure you create a Left Bundle (See [Page Bundles](https://gohugo.io/content-management/page-bundles/)) when creating new content.
+
+Now add your image as a [Page Resource](https://gohugo.io/content-management/page-resources/) by placing it at the root of the folder.
+
+```
+content/
+└── post/
+    └── 2022-12-19-new-post/  <-- page bundle
+        ├── index.md
+        └── sunset.jpg    <-- page resource
+```
+
+You can can name your images anything you like. That’s it. Hugo will handle the rest, creating responsive images with Low Quality Image Placeholders (LQIP) for improved perceived performance.
 
 
 ## Adding content
@@ -109,18 +130,20 @@ Finally, move the _assets_ folder including it’s contents from the _themes/moo
 Use the `hugo` command to create new posts.
 
 ```
-hugo new post/your-post-title.md
+hugo new post/2022-12-19-new-post-title/index.md
 ```
 
-You will find comments in the front matter that explain how to format data correctly.
+Notice posts live within `content/post`.
 
-Add pages in the same manner.
+You will find comments in the front matter that explain how to format the front matter data of your posts correctly.
+
+Add pages in the same manner. Just make sure they are in the root of your `content/` folder, rather than in `content/post`.
 
 ```
-hugo new some-page-name.md
+hugo new contact/index.md
 ```
 
-If you prefer to start your project with demo content, then replace your /content folder with `themes/mood/exampleSite/content`.
+If you prefer to start your project with demo content, then replace your entire `/content` folder with `themes/mood/exampleSite/content`.
 
 ## Tagging content
 
