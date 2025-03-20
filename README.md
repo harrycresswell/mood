@@ -122,7 +122,7 @@ content/
         └── sunset.jpg    <-- page resource
 ```
 
-Make sure you remove `image:` from the front matter of your post.
+Make sure you remove `image: ""` from the front matter of your post.
 
 That’s it. Hugo will handle the rest, creating responsive images with Low Quality Image Placeholders (LQIP) for improved perceived performance.
 
