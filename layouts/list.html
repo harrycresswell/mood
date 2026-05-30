@@ -12,7 +12,7 @@
 				{{ $image_ratio := .Params.image_ratio }}
 				{{ $cloudinary_url := .Site.Params.cloudinary_url }}
 				{{ $base := "/images/" }}
-				{{ if .Site.IsServer }}
+				{{ if hugo.IsServer }}
 					{{ $base = $cloudinary_url }}
 				{{ end }}
 

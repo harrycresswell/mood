@@ -8,7 +8,7 @@
       {{ $image_ratio := .Params.image_ratio }}
       {{ $cloudinary_url := .Site.Params.cloudinary_url }}
       {{ $base := "/images/" }}
-      {{ if .Site.IsServer }}
+      {{ if hugo.IsServer }}
         {{ $base = $cloudinary_url }}
       {{ end }}
 
@@ -70,7 +70,7 @@
       {{- $LQIP_img := $src.Resize "20x jpg" -}}
       {{- $LQIP_b64 := $LQIP_img.Content | base64Encode -}}
       {{/* Add base64-encoded data as a background image to use for the DIV which wraps the `<picture>` element */}}
-      {{- $CFPstyle := printf "%s%s%s" "background: url(data:image/jpeg;base64," $LQIP_b64 "); background-size: cover; background-repeat: no-repeat;" -}}
+      {{- $CFPstyle := printf "%s%s%s" "background: url(data:image/jpeg;base64," $LQIP_b64 "); background-size: cover; background-repeat: no-repeat; image-rendering: pixelated;" -}}
       {{/* Create a JPG of the image to serve as a “fallback” for browsers that don’t understand the `<picture>` element */}}
       {{- $actualImg := $src.Resize "640x jpg" -}}
 
