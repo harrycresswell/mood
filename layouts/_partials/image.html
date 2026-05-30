@@ -1,0 +1,149 @@
+{{/* Store variables */}}
+{{ $page := .page }}
+{{ $params := .params }}
+{{ $imageSrc := .imageSrc }}
+{{ $imageAlt := .imageAlt }}
+{{ $imageRatio := .imageRatio }}
+{{ $imageWidth := .imageWidth }}
+{{ $imageHeight := .imageHeight }}
+{{ $imageQuality := .imageQuality }}
+{{ $imageSm := .imageSm }}
+{{ $imageMd := .imageMd }}
+{{ $imageLg := .imageLg }}
+{{ $sizesMinWidth := .sizesMinWidth }}
+{{ $sizesSize := .sizesSize }}
+{{ $sizesElse := .sizesElse }}
+{{ $decoding := .decoding }}
+{{ $loading := .loading }}
+{{ $cloudinaryLQIP := .cloudinaryLQIP }}
+{{ $cloudinary_url := site.Params.cloudinary_url }}
+
+{{/* Add loading logic */}}
+{{ $loadImage := "" }}
+{{ if eq $loading "eager" }}
+  {{ $loadImage = "eager" }}
+{{ else if eq $loading "lazy" }}
+  {{ $loadImage = "lazy" }}
+{{ end }}
+
+{{/* Add decoding logic */}}
+{{ $decodeImage := "" }}
+{{ if eq $decoding "async" }}
+{{ $decodeImage = "async" }}
+{{ else if eq $decoding "auto" }}
+{{ $decodeImage = "auto" }}
+{{ end }}
+
+
+{{ if isset $params "image" }}
+  {{/* Proxy images using Netlify redirects for production only. See netlify.toml  */}}
+  {{ $base := "/images/" }}
+  {{ if hugo.IsServer }}
+    {{ $base = $cloudinary_url }}
+  {{ end }}
+
+  {{ with $imageSrc }}
+    <picture class="{{- with $imageRatio -}}aspect-ratio-{{ . }}{{- end -}}">
+      <source 
+        type="image/avif" 
+        sizes="(min-width: {{ $sizesMinWidth }}) {{ $sizesSize }}, {{ $sizesElse }}"
+        srcset="{{ $base }}f_avif/q_{{ $imageQuality }}/w_{{ $imageSm }}/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".avif" }} {{ $imageSm }}w,
+                {{ $base }}f_avif/q_{{ $imageQuality }}/w_{{ $imageMd }}/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".avif" }} {{ $imageMd }}w,
+                {{ $base }}f_avif/q_{{ $imageQuality }}/w_{{ $imageLg }}/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".avif" }} {{ $imageLg }}w"
+      />
+      <source 
+        type="image/webp" 
+        sizes="(min-width: {{ $sizesMinWidth }}) {{ $sizesSize }}, {{ $sizesElse }}"
+        srcset="{{ $base }}f_webp/q_{{ $imageQuality }}/w_{{ $imageSm }}/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".webp" }} {{ $imageSm }}w,
+                {{ $base }}f_webp/q_{{ $imageQuality }}/w_{{ $imageMd }}/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".webp" }} {{ $imageMd }}w,
+                {{ $base }}f_webp/q_{{ $imageQuality }}/w_{{ $imageLg }}/{{ . | replaceRE ".jpg|.jpeg|.JPG|.png|.PNG" ".webp" }} {{ $imageLg }}w"
+      />
+      <source 
+          type="image/jpeg" 
+          sizes="(min-width: {{ $sizesMinWidth }}) {{ $sizesSize }}, {{ $sizesElse }}"
+          srcset="{{ $base }}f_auto/q_{{ $imageQuality }}/w_{{ $imageSm }}/{{ . | replaceRE ".jpeg|.JPG|.png|.PNG" ".jpg" }} {{ $imageSm }}w,
+                          {{ $base }}f_auto/q_{{ $imageQuality }}/w_{{ $imageMd }}/{{ . | replaceRE ".jpeg|.JPG|.png|.PNG" ".jpg" }} {{ $imageMd }}w,
+                          {{ $base }}f_auto/q_{{ $imageQuality }}/w_{{ $imageLg }}/{{ . | replaceRE ".jpeg|.JPG|.png|.PNG" ".jpg" }} {{ $imageLg }}w"
+      />
+      <img
+        src="{{ $base }}f_auto/q_{{ $imageQuality }}/w_{{ $imageMd }}/{{ . }}"
+        {{ with $imageAlt }}
+          alt="{{ . }}"
+        {{ else }}
+          alt=""
+        {{ end }} 
+        loading="{{ $loadImage }}"
+        decoding="{{ $decodeImage }}"
+        {{ if ne $cloudinaryLQIP "false" }}
+        style="background-size: cover; background-image: url('{{ $base }}f_auto/q_1/w_5/{{ . }}'); width: 100%;
+        height: 100%; image-rendering: pixelated;" 
+        {{ end }}
+        {{ if (eq $imageRatio "square") }}
+          width="1000"
+          height="1000"
+        {{ else if (eq $imageRatio "landscape") }}
+          width="100%"
+          height="853"
+        {{ else if (eq $imageRatio "portrait") }}
+          width="960"
+          height="1280"
+        {{ end }}
+      />
+    </picture>
+  {{ end }}
+
+{{ else }}
+
+  {{/* If page resources exist with any of the specified formats and any file name. See https://gohugo.io/content-management/page-resources/ */}}
+  {{ with $page.Resources.GetMatch "{*.*,*.jpg,*.png,*.jpeg}" }}
+    {{/* Store the resource in a variable */}}
+    {{- $src := . -}}
+    {{/* Create a 20-pixel-wide Low Quality Image Placeholder (LQIP), then base64-encode the data for improved cacheing and performance */}}
+    {{- $LQIP_img := $src.Resize "20x jpg" -}}
+    {{- $LQIP_b64 := $LQIP_img.Content | base64Encode -}}
+    {{/* Add base64-encoded data as a background image to use for the DIV which wraps the `<picture>` element */}}
+    {{- $CFPstyle := printf "%s%s%s" "background: url(data:image/jpeg;base64," $LQIP_b64 "); background-size: cover; background-repeat: no-repeat; image-rendering: pixelated;" -}}
+    {{/* Create a JPG of the image to serve as a “fallback” for browsers that don’t understand the `<picture>` element */}}
+    {{- $actualImg := $src.Resize "640x jpg" -}}
+    {{/*  Format $CFPstyle as an inline style  */}}
+    {{ $CFPstyleInline := printf "style=%q" $CFPstyle | safeHTMLAttr }}
+    <div {{ $CFPstyleInline }}> 
+
+      {{/*  Add image options to pass to the Resize function  */}}
+      {{ $optSmWebp := printf "%sx webp" $imageSm }}
+      {{ $optMdWebp := printf "%sx webp" $imageMd }}
+      {{ $optLgWebp := printf "%sx webp" $imageLg }}
+      {{ $optSmJpg := printf "%sx jpg" $imageSm }}
+      {{ $optMdJpg := printf "%sx jpg" $imageMd }}
+      {{ $optLgJpg := printf "%sx jpg" $imageLg }}
+
+      <picture>
+        <source 
+          type="image/webp" 
+          srcset="
+              {{ ($src.Resize $optSmWebp ).RelPermalink }} {{ $imageSm }}w,
+              {{ ($src.Resize $optMdWebp ).RelPermalink }} {{ $imageMd }}w,
+              {{ ($src.Resize $optLgWebp ).RelPermalink }} {{ $imageLg }}w,"
+          sizes="(min-width: {{ $sizesMinWidth }}) {{ $sizesSize }}, {{ $sizesElse }}"
+        />
+        <source 
+          type="image/jpeg"
+          srcset="
+              {{ ($src.Resize $optSmJpg ).RelPermalink }} {{ $imageSm }}w,
+              {{ ($src.Resize $optMdJpg ).RelPermalink }} {{ $imageMd }}w,
+              {{ ($src.Resize $optLgJpg ).RelPermalink }} {{ $imageLg }}w,"
+          sizes="(min-width: {{ $sizesMinWidth }}) {{ $sizesSize }}, {{ $sizesElse }}"
+        />
+        <img 
+          src="{{ $actualImg.RelPermalink }}" 
+          alt="{{ with $imageAlt }}{{ . }}{{ end }}"
+          width="{{ $src.Width }}"
+          height="{{ $src.Height }}"
+          loading="{{ $loadImage }}"
+          decoding="{{ $decodeImage }}"
+        />
+      </picture>
+    </div>
+  {{ end }}
+
+{{ end }}
