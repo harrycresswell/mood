@@ -79,8 +79,9 @@
             {{- $CFPstyle := printf "%s%s%s" "background: url(data:image/jpeg;base64," $LQIP_b64 "); background-size: cover; background-repeat: no-repeat; image-rendering: pixelated;" -}}
             {{/* Create a JPG of the image to serve as a “fallback” for browsers that don’t understand the `<picture>` element */}}
             {{- $actualImg := $src.Resize "640x jpg" -}}
-
-            <div style="{{ $CFPstyle | safeCSS }}">
+            {{/* Format $CFPstyle as an inline style */}}
+            {{ $CFPstyleInline := printf "style=%q" $CFPstyle | safeHTMLAttr }}
+            <div {{ $CFPstyleInline }}>
               <picture>
                 <source 
                 type="image/webp" 
