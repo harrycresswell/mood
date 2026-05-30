@@ -1,13 +1,14 @@
 {{ define "main" }}
 	<h1 class="mt20">{{ .Title | title }}</h1>
 	<ul class="TagList">
-	{{ range .Pages }}
-  <li>
-  	<a href="{{ .Permalink }}"><span aria-hidden="true">#</span>{{ .Title }}</a>
-  </li>
-  {{ end }}
- </ul>
+    {{ range .Pages }}
+      <li>
+        <a href="{{ .Permalink }}"><span aria-hidden="true">#</span>{{ .Title }}</a>
+      </li>
+    {{ end }}
+  </ul>
 {{ end }}
+
 {{ define "footer" }}
   {{ if ne .Layout "lightbox" }}
       {{- partialCached "footer.html" . -}}
